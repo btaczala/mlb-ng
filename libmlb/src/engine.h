@@ -2,27 +2,32 @@
 #define MLBCORE_ENGINE_H
 
 #include <QObject>
-namespace mlbcore {
+#include <QLoggingCategory>
 
+Q_DECLARE_LOGGING_CATEGORY(EngineCategory)
+
+class Article;
 class EnginePrivate;
 class Engine : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QObjectList articles READ articles NOTIFY articlesUpdated)
+    Q_PROPERTY(QList<Article*> articles READ articles NOTIFY articlesUpdated)
+    Q_PROPERTY(bool networkAvailable READ networkAvailable NOTIFY networkAvailableChanged)
 public:
     Engine();
     ~Engine() noexcept;
-
 public slots:
-    void updateArticles() const;
-    QObjectList articles() const noexcept;
+    void updateArticles();
+    QList<Article *> articles() const noexcept;
+
+    bool networkAvailable() const noexcept;
+
 signals:
     void articlesUpdated();
+    void networkAvailableChanged();
 private:
     Q_DECLARE_PRIVATE(Engine)
     const QScopedPointer<EnginePrivate> d_ptr;
 };
-
-} // namespace mlbcore
 
 #endif // MLBCORE_ENGINE_H

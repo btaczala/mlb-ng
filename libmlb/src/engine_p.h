@@ -3,10 +3,11 @@
 
 #include <QtCore/QObject>
 #include "downloader.h"
+#include "links.h"
+#include "parser.h"
 
-namespace mlbcore {
 class Engine;
-
+class Article;
 class EnginePrivate : public QObject
 {
     Q_OBJECT
@@ -16,11 +17,13 @@ public:
 private:
     EnginePrivate(Engine *q);
 
-    Engine * const q_ptr;
+    void articlesRefreshed(QUuid, QByteArray);
 
-    QScopedPointer<Downloader> m_pDownloader;
-    QObjectList m_articles;
+    Engine * const q_ptr;
+    Downloader m_downloader;
+    QList<Article*> m_articles;
+    Links m_links;
+    Parser m_parser;
 };
-}
 
 #endif // ENGINE_P_H

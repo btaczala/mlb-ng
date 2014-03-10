@@ -1,9 +1,11 @@
 #ifndef MLBCORE_DOWNLOADER_H
 #define MLBCORE_DOWNLOADER_H
 
-#include <QObject>
+#include <QtCore/QObject>
+#include <QtCore/QUuid>
+#include <QtCore/QLoggingCategory>
 
-namespace mlbcore {
+Q_DECLARE_LOGGING_CATEGORY(DownloaderCategory)
 
 class DownloaderPrivate;
 class Downloader : public QObject
@@ -13,14 +15,16 @@ public:
     explicit Downloader(QObject *parent = 0);
     ~Downloader();
 public slots:
-    void get(const QString& url);
+    QUuid get(const QString& url);
+
+    bool networkAvailable() const noexcept;
+
 signals:
-    void dataReady();
+    void dataReady(QUuid id, QByteArray data);
+    void error();
 private:
     Q_DECLARE_PRIVATE(Downloader)
     QScopedPointer<DownloaderPrivate> d_ptr;
 };
-
-} // namespace mlbcore
 
 #endif // MLBCORE_DOWNLOADER_H
