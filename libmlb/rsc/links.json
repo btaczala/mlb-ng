@@ -1,3 +1,4 @@
 {
-    "allArticles": "http://www.miastobasketu.com/index.php?case=allArts"
+    "allArticles": "http://www.miastobasketu.com/index.php?case=allArts",
+    "oneArticle": "http://miastobasketu.com/index.php?case=art&artykul=%1"
 }

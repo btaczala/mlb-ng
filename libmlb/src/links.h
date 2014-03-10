@@ -11,6 +11,7 @@ public:
     explicit Links(QObject *parent = 0);
 
     QString allArticlesLink() const noexcept;
+    QString articleLink(quint32 id) const noexcept;
 private:
     QVariantMap m_values;
 };

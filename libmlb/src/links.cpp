@@ -24,3 +24,8 @@ QString Links::allArticlesLink() const noexcept
 {
     return m_values["allArticles"].toString();
 }
+
+QString Links::articleLink(quint32 id) const noexcept
+{
+    return m_values["oneArticle"].toString().arg(id);
+}

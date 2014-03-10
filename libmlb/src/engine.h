@@ -16,10 +16,16 @@ class Engine : public QObject
 public:
     Engine();
     ~Engine() noexcept;
-public slots:
-    void updateArticles();
-    QList<Article *> articles() const noexcept;
 
+    Article *article(quint32 id) const noexcept;
+
+public slots:
+    // interface
+    void updateArticles();
+    void fetchSingleArticle(quint32);
+
+    // properties
+    QList<Article *> articles() const noexcept;
     bool networkAvailable() const noexcept;
 
 signals:

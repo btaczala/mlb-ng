@@ -18,12 +18,14 @@ private:
     EnginePrivate(Engine *q);
 
     void articlesRefreshed(QUuid, QByteArray);
+    void articleRefreshed(QUuid, QByteArray);
 
     Engine * const q_ptr;
     Downloader m_downloader;
     QList<Article*> m_articles;
     Links m_links;
     Parser m_parser;
+    Article* m_currentArticle {nullptr};
 };
 
 #endif // ENGINE_P_H
